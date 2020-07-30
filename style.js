@@ -9,28 +9,27 @@ export const Container = styled.View`
 `;
 
 export const CoinName = styled.Text`
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   color: #ffffff;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin: 20px 0 10px 0;
 `;
 
 export const CoinCodeContainer = styled.View`
-  margin-bottom: 10px;
+  margin: 10px 0;
 `;
 
 export const CoinCodeText = styled.Text`
   color: #fff;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   border-bottom-width: 1px;
   padding-bottom: 20px;
   border-bottom-color: #2d3c4a40;
 `;
 
 export const CoinValue = styled.Text`
-  font-size: 70px;
+  font-size: 60px;
   text-align: center;
   color: #ffffff;
 `;
@@ -42,7 +41,7 @@ export const CoinInitials = styled.View`
   align-items: center;
   margin-right: 5px;
   border-width: 2px;
-  border-color: ${props => (props.selected ? "#01ff70" : "#1c2833")};
+  border-color: ${(props) => (props.selected ? "#01ff70" : "#1c2833")};
   border-radius: 100px;
   background-color: #2d3c4a;
   overflow: hidden;
