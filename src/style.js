@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { STATUSBAR_HEIGHT, HORIZONTAL } from "./constants/layout";
 import { FlatList } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
+import colors from "./constants/colors";
 
 export const Container = styled.View`
   flex: 1;
@@ -42,14 +43,14 @@ export const CoinCircle = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 100px;
-  background-color: #ccc;
-  margin-right: 10px;
+  background-color: ${colors.light};
+  margin-right: ${HORIZONTAL}px;
 `;
 
 export const CoinLetter = styled.Text`
   font-weight: bold;
-  font-size: 15px;
-  color: #aaa;
+  font-size: 13px;
+  color: ${colors.primary};
 `;
 
 export const CoinDetailContainer = styled.View`
@@ -57,9 +58,15 @@ export const CoinDetailContainer = styled.View`
   flex-direction: column;
 `;
 
-export const CoinNamePriceRow = styled.View`
+export const CoinDetailRow = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   flex: 1;
+`;
+
+export const CoinNamePriceText = styled.Text`
+  color: ${colors.light};
+  font-size: 16px;
+  font-weight: bold;
 `;
