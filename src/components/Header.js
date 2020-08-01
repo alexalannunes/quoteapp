@@ -9,7 +9,7 @@ const Header = () => {
     <AppHeaderContainer>
       <AppTitle>Coins</AppTitle>
       <Text>
-        <Ionicons name="md-refresh" size={32} color="#fff" />
+        <Ionicons name="md-refresh" size={28} color="#fff" />
       </Text>
     </AppHeaderContainer>
   );

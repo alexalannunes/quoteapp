@@ -1,7 +1,7 @@
 import styled from "styled-components/native";
 import { STATUSBAR_HEIGHT, HORIZONTAL } from "./constants/layout";
 import { FlatList } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import { RectButton, BorderlessButton } from "react-native-gesture-handler";
 import colors from "./constants/colors";
 
 export const Container = styled.View`
@@ -34,7 +34,7 @@ export const ListContainer = styled(FlatList)`
 
 export const ListItem = styled(RectButton)`
   flex-direction: row;
-  padding: 10px ${HORIZONTAL}px;
+  padding: 10px 0 10px ${HORIZONTAL}px;
 `;
 
 export const CoinCircle = styled.View`
@@ -43,19 +43,25 @@ export const CoinCircle = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 100px;
-  background-color: ${colors.light};
+  background-color: ${colors.secondary};
   margin-right: ${HORIZONTAL}px;
 `;
 
 export const CoinLetter = styled.Text`
   font-weight: bold;
   font-size: 13px;
-  color: ${colors.primary};
+  color: ${colors.light};
 `;
 
 export const CoinDetailContainer = styled.View`
   flex: 1;
   flex-direction: column;
+`;
+
+export const CoinFavoriteContainer = styled(BorderlessButton)`
+  width: 40px;
+  align-items: center;
+  padding-top: 10px;
 `;
 
 export const CoinDetailRow = styled.View`
@@ -69,4 +75,5 @@ export const CoinNamePriceText = styled.Text`
   color: ${colors.light};
   font-size: 16px;
   font-weight: bold;
+  margin-bottom: -10px;
 `;
