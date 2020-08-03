@@ -13,11 +13,11 @@ import colors from "../constants/colors";
   *
   * @return {React.FC}
  */
-const ListItemCP = ({ item, index, onFavoriteCoin, favoriteCoins }) => {
+const ListItemCP = ({ item, index, onFavoriteCoin }) => {
   const variationColor = item.varBid < 0 ? "#e74c3c" : "#2ecc71";
   const variantIconName = item.varBid < 0 ? "caretdown" : "caretup";
-  const favoriteIconName = favoriteCoins.indexOf(item.code) != -1 ? "star" : "staro";
-  const favoriteIconColor = favoriteCoins.indexOf(item.code) != -1 ? colors.warning : colors.secondary;
+  const favoriteIconName = item.favorite ? "star" : "staro";
+  const favoriteIconColor = item.favorite ? colors.warning : colors.secondary;
 
   return (
     <ListItem>
@@ -39,7 +39,7 @@ const ListItemCP = ({ item, index, onFavoriteCoin, favoriteCoins }) => {
       </CoinDetailContainer>
       <CoinFavoriteContainer onPress={() => onFavoriteCoin(item.code)}>
         <Text>
-          <AntDesign name={favoriteIconName} size={20} color={favoriteIconColor} />
+          <AntDesign name={favoriteIconName} size={15} color={favoriteIconColor} />
         </Text>
       </CoinFavoriteContainer>
     </ListItem>

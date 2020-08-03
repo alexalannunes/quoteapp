@@ -11,7 +11,7 @@ export const Container = styled.View`
 `;
 
 export const AppHeaderContainer = styled.View`
-  height: 100px;
+  height: 50px;
   align-items: center;
   justify-content: space-between;
   padding: 0 ${HORIZONTAL}px;
@@ -35,6 +35,7 @@ export const ListContainer = styled(FlatList)`
 export const ListItem = styled(RectButton)`
   flex-direction: row;
   padding: 10px 0 10px ${HORIZONTAL}px;
+  border-radius: 0;
 `;
 
 export const CoinCircle = styled.View`
@@ -61,7 +62,7 @@ export const CoinDetailContainer = styled.View`
 export const CoinFavoriteContainer = styled(BorderlessButton)`
   width: 40px;
   align-items: center;
-  padding-top: 10px;
+  justify-content: center;
 `;
 
 export const CoinDetailRow = styled.View`
@@ -76,4 +77,21 @@ export const CoinNamePriceText = styled.Text`
   font-size: 16px;
   font-weight: bold;
   margin-bottom: -10px;
+`;
+
+export const BadgesContainer = styled.ScrollView.attrs({ horizontal: true, showsHorizontalScrollIndicator: false })`
+  padding: ${HORIZONTAL}px;
+`;
+
+export const BadgeButton = styled(RectButton)`
+  padding: 10px 20px;
+  border-radius: 100px;
+  margin-right: 10px;
+  background-color: ${(props) => (props.active ? colors.secondary : colors.primary)};
+`;
+
+export const BadgeButtonText = styled.Text`
+  font-weight: bold;
+  font-size: 15px;
+  color: ${(props) => (props.active ? colors.light : colors.secondary)};
 `;

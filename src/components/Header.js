@@ -8,9 +8,6 @@ const Header = () => {
   return (
     <AppHeaderContainer>
       <AppTitle>Coins</AppTitle>
-      <Text>
-        <Ionicons name="md-refresh" size={28} color="#fff" />
-      </Text>
     </AppHeaderContainer>
   );
 };
