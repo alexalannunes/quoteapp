@@ -1,6 +1,6 @@
 import React from "react";
-import { RefreshControl, ActivityIndicator, Alert, Text, AsyncStorage } from "react-native";
-import { Container, Content, ListContainer } from "./style";
+import { RefreshControl, ActivityIndicator, AsyncStorage, Animated } from "react-native";
+import { Container } from "./style";
 import Header from "./components/Header";
 import ListItemCP from "./components/ListItem";
 import mock_coins from "./mock/index";
@@ -19,6 +19,8 @@ const wait = (timeout) => {
 };
 
 export default class Coins extends React.Component {
+  y = new Animated.Value(0);
+
   constructor(props) {
     super(props);
 
@@ -49,8 +51,6 @@ export default class Coins extends React.Component {
     this.setState({ coins: newCoins }, async () => {
       const favorites = this.state.coins.filter((i) => i.favorite).map((i) => i.code);
       await AsyncStorage.setItem("favorites", JSON.stringify(favorites));
-
-      console.log(await AsyncStorage.getItem("favorites"));
     });
   };
 
@@ -59,28 +59,47 @@ export default class Coins extends React.Component {
   };
 
   async componentDidMount() {
-    const favorites = await AsyncStorage.getItem("favorites");
+    let coins = [];
+    const coinsCopy = [...this.state.coins];
 
-    const { coins } = this.state;
+    try {
+      const favorites = (await AsyncStorage.getItem("favorites")) || [];
 
-    // map
-    let f = coins.map((i) => {
-      return { ...i, favorite: favorites.indexOf(i.code) != -1 ? true : false };
-    });
+      coins = coinsCopy.map((i) => {
+        return { ...i, favorite: favorites.indexOf(i.code) != -1 ? true : false };
+      });
+    } catch (e) {
+      console.log("> Error", e);
+    }
 
-    this.setState({ coins: f });
+    this.setState({ coins });
   }
 
   render() {
     const { badgeActive, coins, refreshing, onlyFavorites } = this.state;
-    const { onBadgeActive, onRefresh, onFavoriteCoin, onOnlyFavorites } = this;
+    const { y, onBadgeActive, onRefresh, onFavoriteCoin, onOnlyFavorites } = this;
     const filteredCoins = onlyFavorites ? coins.filter((i) => i.favorite) : coins;
 
     return (
       <Container>
-        <Header />
+        <Header {...{ y }} />
         <Badges {...{ badgeActive, onBadgeActive, onlyFavorites, onOnlyFavorites }} />
-        <ScrollView showsVerticalScrollIndicator={false} scrollEventThrottle={20} bounces={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          scrollEventThrottle={20}
+          bounces={false}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          contentContainerStyle={{
+            paddingTop: 100,
+          }}
+          onScroll={Animated.event([
+            {
+              nativeEvent: {
+                contentOffset: { y },
+              },
+            },
+          ])}
+        >
           {filteredCoins.length ? filteredCoins.map((item, index) => <ListItemCP key={index} {...{ item, index, onFavoriteCoin }} />) : <ActivityIndicator color={colors.primary} />}
         </ScrollView>
       </Container>

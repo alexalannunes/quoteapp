@@ -4,9 +4,14 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { AppHeaderContainer, AppTitle } from "../style";
 
-const Header = () => {
+const Header = ({ y }) => {
+  const ty = y.interpolate({
+    inputRange: [0, 100],
+    outputRange: [0, -50],
+    extrapolate: "clamp",
+  });
   return (
-    <AppHeaderContainer>
+    <AppHeaderContainer style={{ transform: [{ translateY: ty }] }}>
       <AppTitle>Coins</AppTitle>
     </AppHeaderContainer>
   );
